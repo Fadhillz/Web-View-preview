@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Virtual Tour 360</title>
+
+    <!-- Pannellum CSS CDN -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"
+    />
+    <!-- Pannellum JS CDN -->
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"
+    ></script>
+
+    <style>
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background-color: #0b0b0b;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      #panorama {
+        width: 100%;
+        height: 100%;
+      }
+
+      /* Styling judul di atas layar */
+      .tour-header {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        z-index: 10;
+        background: rgba(0, 0, 0, 0.6);
+        color: #fff;
+        padding: 10px 18px;
+        border-radius: 8px;
+        backdrop-filter: blur(5px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .tour-header h1 {
+        margin: 0;
+        font-size: 16px;
+        font-weight: 600;
+      }
+
+      .tour-header p {
+        margin: 4px 0 0 0;
+        font-size: 12px;
+        color: #aaa;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="tour-header">
+      <h1 id="scene-title">Virtual Tour</h1>
+      <p>Geser layar atau klik hotspot untuk berpindah titik</p>
+    </div>
+
+    <!-- Container Panorama -->
+    <div id="panorama"></div>
+
+    <script>
+      const scenes = {
+        // --- SCENE 1 (Titik A) ---
+        titikA: {
+          title: "Gerbang / Area Depan",
+          type: "equirectangular",
+          panorama: "img/Ruang1.png", // Path gambar pertama
+          hotSpots: [
+            {
+              pitch: -5, // Posisi vertikal titik navigasi (-90 s/d 90)
+              yaw: 60, // Posisi horizontal titik navigasi (-180 s/d 180)
+              type: "scene", // Tipe hotspot untuk pindah scene
+              text: "Masuk ke Dalam (Titik B)",
+              sceneId: "titikB", // Target scene yang dituju
+            },
+          ],
+        },
+
+        // --- SCENE 2 (Titik B) ---
+        titikB: {
+          title: "Area Dalam / Ruang Utama",
+          type: "equirectangular",
+          panorama: "img/Ruang2.png", // Path gambar kedua
+          hotSpots: [
+            {
+              pitch: -3,
+              yaw: -70,
+              type: "scene",
+              text: "Kembali ke Depan (Titik A)",
+              sceneId: "titikA",
+            },
+            {
+              pitch: -3,
+              yaw: 70,
+              type: "scene",
+              text: "Masuk ke Ruang 3",
+              sceneId: "titikC",
+            },
+          ],
+        },
+
+        // --- SCENE 3 (Ruang 3) ---
+        titikC: {
+          title: "Ruang 3",
+          type: "equirectangular",
+          panorama: "img/Ruang3.png",
+          hotSpots: [
+            {
+              pitch: -3,
+              yaw: -70,
+              type: "scene",
+              text: "Kembali ke Ruang Utama (Titik B)",
+              sceneId: "titikB",
+            },
+          ],
+        },
+      };
+
+      // Inisialisasi Pannellum Viewer
+      const viewer = pannellum.viewer("panorama", {
+        default: {
+          firstScene: "titikA",
+          sceneFadeDuration: 1000, // Efek transisi pudar saat pindah scene (ms)
+          autoLoad: true,
+          compass: true,
+        },
+
+        scenes,
+      });
+
+      // Event listener opsional untuk memperbarui judul di header saat scene berubah
+      viewer.on("scenechange", function (sceneId) {
+        document.getElementById("scene-title").innerText =
+          scenes[sceneId].title;
+      });
+    </script>
+  </body>
+</html>
