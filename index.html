@@ -73,7 +73,7 @@
       const scenes = {
         // --- SCENE 1 (Titik A) ---
         titikA: {
-          title: "Gerbang / Area Depan",
+          title: "Ruang Tengah",
           type: "equirectangular",
           panorama: "img/Ruang1.png", // Path gambar pertama
           hotSpots: [
@@ -84,43 +84,102 @@
               text: "Masuk ke Dalam (Titik B)",
               sceneId: "titikB", // Target scene yang dituju
             },
+            {
+              pitch: -3,
+              yaw: -17,
+              type: "scene",
+              text: "Masuk ke Situ (Titik D)",
+              sceneId: "titikD",
+            },
           ],
         },
 
         // --- SCENE 2 (Titik B) ---
         titikB: {
-          title: "Area Dalam / Ruang Utama",
+          title: "Ruang Transisi Dapur",
           type: "equirectangular",
           panorama: "img/Ruang2.png", // Path gambar kedua
           hotSpots: [
             {
               pitch: -3,
-              yaw: -70,
+              yaw: -120,
               type: "scene",
               text: "Kembali ke Depan (Titik A)",
               sceneId: "titikA",
             },
             {
               pitch: -3,
-              yaw: 70,
+              yaw: -40,
               type: "scene",
-              text: "Masuk ke Ruang 3",
-              sceneId: "titikC",
+              text: "Pergi ke anu(Titik D)",
+              sceneId: "titikD",
+            },
+            {
+              pitch: -3,
+              yaw: 0,
+              type: "scene",
+              text: "Masuk ke Dapur (Titik E)",
+              sceneId: "titikE",
             },
           ],
         },
 
         // --- SCENE 3 (Ruang 3) ---
         titikC: {
-          title: "Ruang 3",
+          title: "Kamar Ibun",
           type: "equirectangular",
           panorama: "img/Ruang3.png",
           hotSpots: [
             {
               pitch: -3,
-              yaw: -70,
+              yaw: 150,
               type: "scene",
-              text: "Kembali ke Ruang Utama (Titik B)",
+              text: "Keluar Kamar ",
+              sceneId: "titikD",
+            },
+          ],
+        },
+
+        // --- SCENE 4 (Ruang 4) ---
+        titikD: {
+          title: "Ruang Transisi Kamar",
+          type: "equirectangular",
+          panorama: "img/Ruang4.png",
+          hotSpots: [
+            {
+              pitch: -3,
+              yaw: 155,
+              type: "scene",
+              text: "Kembali ke depan(Titik A)",
+              sceneId: "titikA",
+            },
+            {
+              pitch: -3,
+              yaw: 100,
+              type: "scene",
+              text: "Pergi ke sana(Titik B)",
+              sceneId: "titikB",
+            },
+            {
+              pitch: -3,
+              yaw: 30,
+              type: "scene",
+              text: "Masuk ke kamar Ibun (Titik C)",
+              sceneId: "titikC",
+            },
+          ],
+        },
+        // --- SCENE 5 (Ruang 5) ---
+        titikE: {
+          title: "Dapur",
+          type: "equirectangular",
+          panorama: "img/Ruang5.png",
+          hotSpots: [
+            {
+              pitch: -3,
+              yaw: 200,
+              type: "scene",
+              text: "Keluar dari dapur ",
               sceneId: "titikB",
             },
           ],
